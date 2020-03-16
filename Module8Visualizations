@@ -1,0 +1,18 @@
+setwd("~/Desktop/R Programming")
+library("lattice", lib.loc="/Library/Frameworks/R.framework/Versions/3.6/Resources/library")
+library("ggplot2", lib.loc="/Library/Frameworks/R.framework/Versions/3.6/Resources/library")
+wool <- read.csv("Wool.csv")
+head(wool)
+# Visualization #1 Histogram
+hist(wool$cycles, col="pink")
+
+# Visualization #2 Line Graph
+lineWool <- plot(wool$len, wool$cycles, type="p", xlab="Length of Wool",
+                 ylab="Number of Cycles")
+
+# Visualization #3 Faceting
+facet.wool <- ggplot(wool, aes(x=amp, y=cycles, col=len)) + xlab("Amplitude of Loading Cycle") +  
+     ylab("Number of Cycles until Failure") + ggtitle("Faceting Correlation of Amplitude and Number of Cycles by Wool Length") + geom_point()
+
+facet.wool + facet_grid(~wool$len)
+
